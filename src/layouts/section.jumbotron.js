@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import { THEME } from '../config';
 import { Section, CenterColumn, NavMenu } from '../components';
 
-const Jumbotron = styled.div`
+const JumbotronArea = styled.div`
   width: 100%;
-  padding: 2rem 0;
+  padding: 2em 0;
+
+  font-size: 16px;
+  line-height: 2em;
 
   display: flex;
   justify-content: center;
@@ -15,11 +18,24 @@ const Jumbotron = styled.div`
   & img {
     width: 30%;
   }
+
+  @media screen and (max-width: 800px) {
+    font-size: 12px;
+
+    flex-direction: column-reverse;
+    
+    & img {
+      width: 50%;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
+  }
 `;
 const Slogan = styled.div`
   width: 50%;
   height: 100%;
-  margin: 0 2rem;
+  margin: 0 2em;
 
   display: flex;
   flex-direction: column;
@@ -27,13 +43,16 @@ const Slogan = styled.div`
   color: #e0e0e0;
 
   & h1 {
-    line-height: 6rem;
-    font-size: 2.8rem;
+    line-height: 2.3em;
+    font-size: 2.8em;
   }
   & p {
-    font-size: 1.2rem;
-    line-height: 1.9rem;
-    letter-spacing: .1rem;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    letter-spacing: .1em;
+  }
+  @media screen and (max-width: 800px) {
+    width: 80%;
   }
 `;
 
@@ -64,13 +83,13 @@ query {
             <NavMenu items={data.site.siteMetadata.navItems} />
           </div>
         </div>
-        <Jumbotron>
+        <JumbotronArea>
           <Slogan>
             <h1>{data.site.siteMetadata.title}</h1>
             <p>{data.site.siteMetadata.description}</p>
           </Slogan>
           <img src={data.site.siteMetadata.jumbotron} alt='coding' />
-        </Jumbotron>
+        </JumbotronArea>
       </CenterColumn>
     </Section>
   )

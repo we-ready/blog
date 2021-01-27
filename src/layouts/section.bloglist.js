@@ -1,59 +1,87 @@
 
 import React from "react";
-import { Link, graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
-import { Section, CenterColumn } from '../components';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import { THEME } from '../config';
+import { Section } from '../components';
 
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+const ListArea = styled.div`
+  max-width: ${THEME.size.sectionContainerWidthMax};
+  margin: 0 auto;
 
-  & span {
-    margin: .2rem 0;
-    padding: .1rem .3rem;
-    background-color: #bbb;
-    border-radius: 6%;
-    color: #fff;
-    white-space: nowrap;
+  font-size: 16px;
+  line-height: 2em;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
   }
-  & span + span {
-    margin-left: 1rem;
+`;
+const CoverArea = styled.div`
+  width: 20%;
+  & img {
+    width: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 60%;
+    margin: 0 auto;
+  }
+`;
+const TextArea = styled.div`
+  & h2, h3, h4 {
+    color: #333;
+  }
+  & h1 {
+    color: #000;
+    font-size: 1.28em;
+  }
+  & h2 {
+    font-size: 1em;
+    font-weight: normal;
+  }
+  & h4 {
+    font-size: .9em;
   }
 
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const PaperFloat = styled.div`
-  position: relative;
-  margin: 1.6rem;
-  padding: .5rem 1rem;
+  margin: 1.6em;
+  padding: .5em 1em;
   border-radius: 6px;
   background-color: #fcfcfc;
   box-shadow:
     -3px -3px 7px rgba(255, 255, 255, .99),
      3px  3px 5px rgba(94, 104, 121, .288);
 
-  & img {
-    position: absolute;
-    top: 0;
-    right: 2rem;
-    /* width: 30%; */
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
   }
-  & h1, h2, h3, h4 {
-    color: #333;
+
+`;
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  & span {
+    margin: .2em 0;
+    padding: .1em .3em;
+    background-color: #bbb;
+    border-radius: 6%;
+    color: #fff;
+    white-space: nowrap;
   }
-  & h1 {
-    font-size: 1.2rem;
-    color: #000;
+  & span + span {
+    margin-left: 1em;
   }
-  & h2 {
-    line-height: 2rem;
-    font-size: 1rem;
-    font-weight: normal;
-  }
-  & h4 {
-    font-size: .9rem;
-  }
+
 `;
 
 export default function BlogListSection() {
@@ -86,29 +114,31 @@ query {
   const gitBlogs = data?.allMarkdownRemark?.nodes.filter((n) => (!!n.frontmatter?.id));
   return (
     <Section>
-      <CenterColumn>
+      <ListArea>
       { gitBlogs.map(blog => {
           const {id, cover, title, subtitle, author, subject, category, tags, keywords, created_when } = blog.frontmatter || {};
           const ts = !tags     ? [] : tags.split(';').filter(t => !!t);
           const ks = !keywords ? [] : keywords.split(';').filter(k => !!k);
           const tks= [ ...ts, ...ks];
           return (
-            <Link to={`/blog/${id}`} style={{textDecoration: 'none'}}>
+            <Link key={id} to={`/blog/${id}`} style={{textDecoration: 'none'}}>
               <PaperFloat>
-                { !cover ? null : <img src={cover} alt='cover' /> }
-                <h1>{ !subject ? title : `【${category}】${title}`}</h1>
-                <h2>{subtitle}</h2>
-                <Tags>
-                { 
-                  (tks.length === 0) ? null : tks.map((item) => (<span>{item}</span>))
-                }
-                </Tags>
-                <h4>{`${created_when}  ${author}`}</h4>
+                { !cover ? <span></span> : <CoverArea><img src={cover} alt='cover' /></CoverArea> }
+                <TextArea>
+                  <h1>{ !subject ? title : `【${category}】${title}`}</h1>
+                  <h2>{subtitle}</h2>
+                  <Tags>
+                  { 
+                    (tks.length === 0) ? null : tks.map((item) => (<span>{item}</span>))
+                  }
+                  </Tags>
+                  <h4>{`${created_when}  ${author}`}</h4>
+                </TextArea>
               </PaperFloat>
             </Link>
           )
       } ) }
-      </CenterColumn>
+      </ListArea>
     </Section>
   )
 }
