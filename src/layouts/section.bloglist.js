@@ -87,11 +87,8 @@ const Tags = styled.div`
 export default function BlogListSection() {
   const data = useStaticQuery(graphql`
 query {
-  allMarkdownRemark {
+  allMarkdownRemark(filter: {frontmatter: {id: {ne: null}}}, sort: {fields: frontmatter___updated_when, order: DESC}) {
     nodes {
-      fields {
-        filename
-      }
       frontmatter {
         id
         title
@@ -101,11 +98,12 @@ query {
         keywords
         tags
         category
-        created_when(formatString: "YYYY-MM-DD")
         cover
+        created_when(formatString: "YYYY-MM-DD")
+        updated_when(formatString: "YYYY-MM-DD")
+        level
       }
-      excerpt(format: PLAIN, pruneLength: 60)
-      html
+      excerpt(pruneLength: 20, truncate: true, format: MARKDOWN)
     }
   }
 }

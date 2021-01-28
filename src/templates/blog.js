@@ -22,7 +22,7 @@ const BlogContentArea = styled.div`
   display: flex;
   justify-content: center;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1300px) {
     flex-direction: column-reverse;
     font-size: 10px;
     line-height: 2.6em;
@@ -33,6 +33,7 @@ const BlogContentArea = styled.div`
 const MarkdownContent = styled.div`
 
   flex-grow: 1;
+  max-width: 100%;
 
   padding: 0 1em;
   min-height: 100%;
@@ -49,6 +50,7 @@ const MarkdownContent = styled.div`
     background-color: #333;
   }
   & pre code {
+    max-width: 100%;
     font-family: Menlo, Monaco, "Courier New", monospace;
     color: #fff;
     background: transparent;

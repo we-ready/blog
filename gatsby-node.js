@@ -19,14 +19,10 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 module.exports.createPages = async ({ graphql, actions }) => {
-
   const gqlPosts = await graphql(`
 query {
-  allMarkdownRemark {
+  allMarkdownRemark(filter: {frontmatter: {id: {ne: null}}}, sort: {fields: frontmatter___updated_when, order: DESC}) {
     nodes {
-      fields {
-        filename
-      }
       frontmatter {
         id
         title
@@ -39,15 +35,16 @@ query {
         cover
         created_when(formatString: "YYYY-MM-DD")
         updated_when(formatString: "YYYY-MM-DD")
+        level
       }
-      excerpt(format: PLAIN, pruneLength: 60)
+      excerpt(pruneLength: 20, truncate: true, format: MARKDOWN)
       html
     }
   }
 }
   `)
-  // console.log(99999, gqlPosts.data.allMarkdownRemark.nodes);
-  const gitBlogs = gqlPosts.data.allMarkdownRemark.nodes.filter((n) => (!!n.frontmatter && n.frontmatter.id));
+  const gitBlogs = gqlPosts.data.allMarkdownRemark.nodes;
+  console.log(99999, gitBlogs);
 
   const { createPage }  = actions;
   const templateBlog    = path.resolve('./src/templates/blog.js');
