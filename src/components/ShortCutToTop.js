@@ -8,8 +8,8 @@ export const PageTopAnchor = () => (
 export const ShortCutToTop = () => (
   <div style={{ 
     position: 'fixed', 
-    bottom: '40px',
-    right: '20px', 
+    bottom: '2rem',
+    right: '2rem', 
     // width: '32px', 
     // height: '32px', 
     zIndex: '999',
