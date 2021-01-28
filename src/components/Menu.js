@@ -26,6 +26,11 @@ const MenuContainer = styled.nav`
   & ul {
     list-style: none;
   }
+
+  @media screen and (max-width: ${THEME.size.navMenuStyleThreshold}) {
+    display: none;
+  }
+
 `;
 const Menu = styled.ul`
   width: 100%;

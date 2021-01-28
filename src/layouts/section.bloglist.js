@@ -115,13 +115,13 @@ query {
   return (
     <Section>
       <ListArea>
-      { gitBlogs.map(blog => {
+      { gitBlogs.map((blog, index) => {
           const {id, cover, title, subtitle, author, subject, category, tags, keywords, created_when } = blog.frontmatter || {};
           const ts = !tags     ? [] : tags.split(';').filter(t => !!t);
           const ks = !keywords ? [] : keywords.split(';').filter(k => !!k);
           const tks= [ ...ts, ...ks];
           return (
-            <Link key={id} to={`/blog/${id}`} style={{textDecoration: 'none'}}>
+            <Link key={index} to={`/blog/${id}`} style={{textDecoration: 'none'}}>
               <PaperFloat>
                 { !cover ? <span></span> : <CoverArea><img src={cover} alt='cover' /></CoverArea> }
                 <TextArea>
@@ -129,7 +129,7 @@ query {
                   <h2>{subtitle}</h2>
                   <Tags>
                   { 
-                    (tks.length === 0) ? null : tks.map((item) => (<span>{item}</span>))
+                    (tks.length === 0) ? null : tks.map((item, idx) => (<span key={idx}>{item}</span>))
                   }
                   </Tags>
                   <h4>{`${created_when}  ${author}`}</h4>

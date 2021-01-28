@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { THEME } from '../config';
-import { Section, CenterColumn, NavMenu } from '../components';
+import { Section, CenterColumn, NavMenu, PopMenu } from '../components';
 
 const JumbotronArea = styled.div`
   width: 100%;
@@ -78,6 +78,8 @@ query {
   return (
     <Section style={{background: `linear-gradient(90deg,${THEME.color.primary.border},${THEME.color.primary.ft})` }}>
       <CenterColumn>
+        <PopMenu color='#eee' items={data.site.siteMetadata.navItems} />
+
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
           <div style={{width: '20rem', color: '#fff'}} >
             <NavMenu items={data.site.siteMetadata.navItems} />
