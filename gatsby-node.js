@@ -44,7 +44,7 @@ query {
 }
   `)
   const gitBlogs = gqlPosts.data.allMarkdownRemark.nodes;
-  console.log(99999, gitBlogs);
+  // console.log(99999, gitBlogs);
 
   const { createPage }  = actions;
   const templateBlog    = path.resolve('./src/templates/blog.js');

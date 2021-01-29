@@ -5,9 +5,10 @@
  */
 
 const navItems = [
-  {key: 'home',     url: '/',     text: '首页'},
-  {key: 'service',  url: '/service',  text: '服务'},
-  {key: 'member',   url: '/member',   text: '会员'},
+  {key: 'home',     url: '/',                 text: '首页'},
+  {key: 'story',    url: '/storybook.html',   text: '演示', },
+  {key: 'service',  url: '/service',          text: '服务'},
+  {key: 'member',   url: '/member',           text: '会员'},
 ]
 const siteMetadata = {
   title: 'WeReady',

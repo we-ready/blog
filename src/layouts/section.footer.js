@@ -50,9 +50,9 @@ query {
           <span>{data?.site?.siteMetadata?.contact?.phone}</span>
           <span style={{margin: '0 .7em'}}></span>
           <span role="img" aria-label="Email" >📧</span>
-          <span>{data?.site?.siteMetadata?.contact?.phone}</span>
+          <span>{data?.site?.siteMetadata?.contact?.email}</span>
         </div>
-        <span role="img" aria-label="Goodness" >✨ 🍺 🏠 ☕ 🌈</span>
+        <span role="img" aria-label="Goodness" >✨ 🍺 🏠 ☕ 🌈 🇨🇳  </span>
       </FooterArea>
     </Section>
   )
