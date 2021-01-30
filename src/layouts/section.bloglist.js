@@ -17,14 +17,22 @@ const ListArea = styled.div`
   }
 `;
 const CoverArea = styled.div`
-  width: 20%;
-  & img {
-    width: 100%;
-  }
+  max-height: 9em;
+  max-width: 9em;
   @media screen and (max-width: 500px) {
+    max-height: none;
+    max-width: none;
     width: 60%;
     margin: 0 auto;
   }
+
+  & img {
+    display: inline-block;
+    padding: .2em;
+    height: 100%;
+    width: 100%;
+  }
+
 `;
 const TextArea = styled.div`
   & h2, h3, h4 {
@@ -51,7 +59,7 @@ const PaperFloat = styled.div`
   margin: 1.6em;
   padding: .5em 1em;
   border-radius: 6px;
-  background-color: #fcfcfc;
+  background-color: #f4f4f4;
   box-shadow:
     -3px -3px 7px rgba(255, 255, 255, .99),
      3px  3px 5px rgba(94, 104, 121, .288);
@@ -59,9 +67,11 @@ const PaperFloat = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
+  align-items: center;
   
   @media screen and (max-width: 500px) {
     flex-direction: column;
+    align-items: stretch;
   }
 
 `;
