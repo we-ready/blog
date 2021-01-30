@@ -111,6 +111,42 @@ const MarkdownContent = styled.div`
     max-width: 100%;
   }
 
+
+  & table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+  }
+  & thead {
+    background-color: #666666;
+    color: #fff;
+    /* text-align: left; */
+    vertical-align: bottom;
+    letter-spacing: .2em;
+  }
+  & td,th {
+    margin: 0;
+    padding: .5em 1em;
+    border-left: 1px solid #cbcbcb;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    overflow: visible;
+  }
+  & tr:nth-child(2n+1) {
+    background-color: transparent;
+  }
+  & tr:nth-child(2n+0) {
+    background-color: #f9f9f9;
+  }
+ 
+  & caption {
+    color: #000;
+    font: italic 85%/1 arial,sans-serif;
+    padding: 1em 0;
+    text-align: center;
+  }
+
 `;
 
 const SideColumn = styled.div`
@@ -120,24 +156,46 @@ const SideColumn = styled.div`
     padding: 2em 1em;
   }
 `;
+
+const Tag = styled.span`
+  text-decoration: underline;
+  margin-left: 1em;
+`;
+const TagsList = styled.p`
+  width: 100%;
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 const Details = styled.div`
   width: 100%;
   /* border: solid 1px red; */
-  
-  & h4 {
-    color: ${THEME.color.primary.ft};
-    font-size: 1em;
-  }
-  & h5 {
-    color: ${THEME.color.normal.ft};
-    line-height: 2.1em;
-    margin-bottom: .3em;
+  & h6, p, span {
+    line-height: 2.8em;
     font-size: .8em;
   }
+  & h6 {
+    color: ${THEME.color.primary.ft};
+  }
+  & span {
+    color: #999;
+    font-weight: bold;
+    letter-spacing: .16em;
+  }
+    
 `;
 
 export default function Blog({pageContext}) {
   // console.log(98989898, pageContext)
+
+  const at = (pageContext?.frontmatter?.tags?.length > 0) ? pageContext?.frontmatter?.tags?.split(';') : null;
+  const ak = (pageContext?.frontmatter?.keywords?.length > 0) ? pageContext?.frontmatter?.keywords?.split(';') : null;
+  const ss = [];
+  if (!!at && (at.length > 0)) ss.push(...at);
+  if (!!ak && (ak.length > 0)) ss.push(...ak);
+  const tags = Array.from(new Set(ss));
+
   return (
     <GeneralLayout context={{ head: pageContext?.frontmatter?.title }} >
 
@@ -146,11 +204,29 @@ export default function Blog({pageContext}) {
           <MarkdownContent dangerouslySetInnerHTML={{__html: pageContext?.html}} />
           <SideColumn >
             <Details>
-              <h4>{pageContext?.frontmatter?.subject}</h4>
-              <h5>{pageContext?.frontmatter?.author}</h5>
-              <h5>{pageContext?.frontmatter?.keywords}</h5>
-              <h5>{pageContext?.frontmatter?.tags}</h5>
-              <h5>{pageContext?.frontmatter?.category}</h5>
+              <table style={{width: '100%', marginBottom: '1.2em'}}>
+                <tr>
+                  <td><h6>{`主题：${pageContext?.frontmatter?.subject}`}</h6></td>
+                  <td><h6>{`类别：${pageContext?.frontmatter?.category}`}</h6></td>
+                </tr>
+                <tr>
+                  <td><h6>{`更新：${pageContext?.frontmatter?.updated_when}`}</h6></td>
+                  <td><h6>{`创建：${pageContext?.frontmatter?.created_when}`}</h6></td>
+                </tr>
+                <tr>
+                  <td><h6>{`作者：${pageContext?.frontmatter?.author}`}</h6></td>
+                </tr>
+              </table>
+
+              { !tags ? null : 
+                <TagsList>
+                  <span>{'标签&关键字：'}</span>
+                  { tags.map((t) => (
+                    <Tag>{t}</Tag>
+                  )) }
+                </TagsList>
+                
+              }
             </Details>
           </SideColumn >
         </BlogContentArea>
