@@ -196,8 +196,12 @@ export default function Blog({pageContext}) {
   if (!!ak && (ak.length > 0)) ss.push(...ak);
   const tags = Array.from(new Set(ss));
 
+  const context = pageContext?.frontmatter || {};
   return (
-    <GeneralLayout context={{ head: pageContext?.frontmatter?.title }} >
+    <GeneralLayout context={{
+      ...context,
+      head: pageContext?.frontmatter?.title,
+    }} >
 
       <Section style={{background: '#fff', padding: '1em'}}>
         <BlogContentArea>

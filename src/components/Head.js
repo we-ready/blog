@@ -24,15 +24,16 @@ export const Head = ({context}) => {
         `${data.site.siteMetadata.title} | ${context.head}`
       }
       </title>
-      {/* <meta name='keywords'           content='' />
-      <meta name='keywords'           content='' />
-      <meta property='wr:title'       content='' />
-      <meta property='wr:type'        content='' />
-      <meta property='wr:description' content='' />
-      <meta property='wr:image'       content='' />
-      <meta property='wr:locale'      content='' />
-      <meta property='wr:url'         content='' />
-      <link rel='canonical'           content='' /> */}
+
+      { !context?.keywords ? null : <meta name='keywords'            content={context.keywords} /> }
+      { !context?.category ? null : <meta property='wr:type'         content={context.category} /> }
+      { !context?.title    ? null : <meta property='wr:title'        content={context.title} /> }
+      { !context?.subtitle ? null : <meta property='wr:description'  content={context.subtitle} /> }
+
+      {/* { !context?.? null : <meta property='wr:image'       content={context.} /> }
+      { !context?.? null : <meta property='wr:locale'      content={context.} /> }
+      { !context?.? null : <meta property='wr:url'         content={context.} /> } */}
+      {/* <link rel='canonical'           content='' /> */}
     }
     </Helmet>
   )
