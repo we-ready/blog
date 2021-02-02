@@ -16,6 +16,8 @@ const Menu = styled.ul`
   display: block;
   z-index: 9999;
 
+  font-size: 24px;
+
   background: ${THEME.color.primary.bg};
 
   transform: ${(props) => !props.open ? `translateX(110vw)` : `translateX(0)` } ;
