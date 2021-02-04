@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Section } from '../components';
 import { THEME } from '../config';
 import GeneralLayout from '../layouts/general';
-// import '../styles/index.css';
+import '../styles/index.css';
 
 /**
   尺寸定义全部使用 EM

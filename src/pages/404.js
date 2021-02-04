@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'gatsby';
+import '../styles/index.css';
 
 export default function NotFound() {
   return (
