@@ -2253,7 +2253,7 @@ babel-plugin-remove-graphql-queries@^2.14.0:
   resolved "https://registry.npm.taobao.org/babel-plugin-remove-graphql-queries/download/babel-plugin-remove-graphql-queries-2.14.0.tgz#d34dbc8aaa4eb2b6f11165c63bf3c226b283194b"
   integrity sha1-0028iqpOsrbxEWXGO/PCJrKDGUs=
 
-"babel-plugin-styled-components@>= 1":
+"babel-plugin-styled-components@>= 1", babel-plugin-styled-components@^1.12.0:
   version "1.12.0"
   resolved "https://registry.npm.taobao.org/babel-plugin-styled-components/download/babel-plugin-styled-components-1.12.0.tgz#1dec1676512177de6b827211e9eda5a30db4f9b9"
   integrity sha1-HewWdlEhd95rgnIR6e2low20+bk=
@@ -5372,6 +5372,13 @@ gatsby-plugin-react-helmet@^3.7.0:
   version "3.8.0"
   resolved "https://registry.npm.taobao.org/gatsby-plugin-react-helmet/download/gatsby-plugin-react-helmet-3.8.0.tgz#f7bda9378e21795f39d55fbea83a0458e737ff62"
   integrity sha1-972pN44heV851V++qDoEWOc3/2I=
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
+gatsby-plugin-styled-components@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.npm.taobao.org/gatsby-plugin-styled-components/download/gatsby-plugin-styled-components-3.10.0.tgz#beeafee695b1a42df6584ca5afcaa9b461eb29f5"
+  integrity sha1-vur+5pWxpC32WEylr8qptGHrKfU=
   dependencies:
     "@babel/runtime" "^7.12.5"
 
