@@ -64,6 +64,15 @@ const MarkdownContent = styled.div`
     color: #007cff;
   }
 
+  & ul ul {
+    padding: 0 1.6em;
+    /* list-style-type: disc; */
+    /* list-style-type: circle; */
+  }
+  & ul ul ul {
+    list-style-type: square;
+  }
+
   &.retro-no-decoration {
     text-decoration: none;
   }
