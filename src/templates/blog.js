@@ -167,30 +167,36 @@ const SideColumn = styled.div`
 `;
 
 const Tag = styled.span`
-  text-decoration: underline;
   margin-left: 1em;
+  color: #999;
+  text-decoration: underline;
+  
 `;
 const TagsList = styled.p`
   width: 100%;
-  margin-top: 1em;
+  margin-top: .2em;
   display: flex;
   flex-wrap: wrap;
+  & span {
+    /* color: #999; */
+    font-weight: bold;
+    letter-spacing: .16em;
+  }
 `;
 
 const Details = styled.div`
   width: 100%;
   /* border: solid 1px red; */
-  & h6, p, span {
-    line-height: 2.8em;
+  & h5, h6, p {
+    display: inline-block;
+    line-height: 2em;
     font-size: .8em;
   }
-  & h6 {
+  & h5 {
     color: ${THEME.color.primary.ft};
   }
-  & span {
-    color: #999;
-    font-weight: bold;
-    letter-spacing: .16em;
+  & h6 {
+    font-weight: normal;
   }
     
 `;
@@ -219,15 +225,15 @@ export default function Blog({pageContext}) {
             <Details>
               <table style={{width: '100%', marginBottom: '1.2em'}}>
                 <tr>
-                  <td><h6>{`主题：${pageContext?.frontmatter?.subject}`}</h6></td>
-                  <td><h6>{`类别：${pageContext?.frontmatter?.category}`}</h6></td>
+                  <td><h5>主题：</h5><h6>{`${pageContext?.frontmatter?.subject}`}</h6></td>
+                  <td><h5>类别：</h5><h6>{`${pageContext?.frontmatter?.category}`}</h6></td>
                 </tr>
                 <tr>
-                  <td><h6>{`更新：${pageContext?.frontmatter?.updated_when}`}</h6></td>
-                  <td><h6>{`创建：${pageContext?.frontmatter?.created_when}`}</h6></td>
+                  <td><h5>更新：</h5><h6>{`${pageContext?.frontmatter?.updated_when}`}</h6></td>
+                  <td><h5>创建：</h5><h6>{`${pageContext?.frontmatter?.created_when}`}</h6></td>
                 </tr>
                 <tr>
-                  <td><h6>{`作者：${pageContext?.frontmatter?.author}`}</h6></td>
+                  <td><h5>作者：</h5><h6>{`${pageContext?.frontmatter?.author}`}</h6></td>
                 </tr>
               </table>
 

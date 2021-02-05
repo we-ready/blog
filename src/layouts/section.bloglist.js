@@ -35,8 +35,13 @@ const CoverArea = styled.div`
 
 `;
 const TextArea = styled.div`
-  & h2, h3, h4 {
+  & h2, h4 {
     color: #333;
+  }
+  & h3 {
+    color: #999;
+    font-size: .9em;
+    line-height: 1.6em;
   }
   & h1 {
     color: #000;
@@ -81,16 +86,17 @@ const Tags = styled.div`
   flex-wrap: wrap;
 
   & span {
-    margin: .2em 0;
-    padding: .1em .3em;
+    margin: .1em .2em;
+    padding: 0 .3em;
     background-color: #bbb;
-    border-radius: 6%;
+    line-height: 1.39em;
+    border-radius: 3px;
     color: #fff;
     white-space: nowrap;
   }
-  & span + span {
+  /* & span + span {
     margin-left: 1em;
-  }
+  } */
 
 `;
 
@@ -133,8 +139,9 @@ query {
               <PaperFloat>
                 { !cover ? <span></span> : <CoverArea><img src={cover} alt='cover' /></CoverArea> }
                 <TextArea>
-                  <h1>{ !subject ? title : `【${category}】${title}`}</h1>
-                  <h2>{subtitle}</h2>
+                  { !subject ? null : <h3>{subject}</h3> }
+                  <h1>{ !category ? title : `【${category}】${title}`}</h1>
+                  { !subtitle ? null : <h2>{subtitle}</h2> }
                   <Tags>
                   { 
                     (tks.length === 0) ? null : tks.map((item, idx) => (<span key={idx}>{item}</span>))
