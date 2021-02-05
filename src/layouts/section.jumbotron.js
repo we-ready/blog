@@ -69,6 +69,16 @@ query {
         key
         url
         text
+        sub {
+          key
+          url
+          text
+          sub {
+            key
+            url
+            text
+          }
+        }
       }
     }
   }
