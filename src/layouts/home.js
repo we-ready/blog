@@ -10,7 +10,7 @@ export default function HomeLayout ({context}) {
     <Head context={context} />
 
     <PageTopAnchor />
-    <ShortCutToTop />
+    <ShortCutToTop>👍</ShortCutToTop>
 
     <JumbotronSection />
     <BlogListSection />

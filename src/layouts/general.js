@@ -9,7 +9,7 @@ export default function GeneralLayout ({context, children}) {
     <Head context={context} />
 
     <PageTopAnchor />
-    <ShortCutToTop />
+    <ShortCutToTop>👍</ShortCutToTop>
 
     <HeaderSection />
     {children}
