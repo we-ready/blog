@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { Bars } from './bars';
-import { THEME } from '../config';
+import { MENU_SETTING } from './menu.setting';
 
 /**
   Styled Components
@@ -18,7 +18,7 @@ const Menu = styled.ul`
 
   font-size: 24px;
 
-  background: ${THEME.color.primary.bg};
+  background: ${ (props) => ( props.color?.bg) };
 
   transform: ${(props) => !props.open ? `translateX(110vw)` : `translateX(0)` } ;
 
@@ -36,11 +36,11 @@ const MenuItem = styled.li`
     display: block;
     padding: 0 .5em;
     font-size: 1.1em;
-    color: #ddd;
+    color: ${(props) => props.color?.ft || '#ddd'};
     transition: color 0.6s;
   }
   & a:hover {
-    color: #fff;
+    color: ${(props) => props.color?.ftHover || '#fff'};
   }
   &:hover > ${SubMenu} {
     display: block;
@@ -52,35 +52,40 @@ const MenuItem = styled.li`
 /**
   Function Components
  */
-const RecurMenu = ({items, open, ext}) => (
-  !items ? null :
-  <SubMenu  className='menu' ext={ext} open={open} >
-  { items?.map((item, index) => (
-    <MenuItem key={index} active={index === -1}>
-      <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-        <span>{item.text}</span>
-        { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
-      </Link>
-      { !item.sub ? null : <RecurMenu ext={true} items={item.sub} /> }
-    </MenuItem>
-  )) }
-  </SubMenu>
-)
-const MainMenu = ({items, open, ext}) => (
-  !items ? null :
-  <Menu className='menu' ext={ext} open={open} >
-  { items?.map((item, index) => (
-    <MenuItem key={index} active={index === -1}>
-      <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-        <span>{item.text}</span>
-        { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
-      </Link>
-      { !item.sub ? null : <RecurMenu ext={true} items={item.sub} /> }
-    </MenuItem>
-  )) }
-  </Menu>
-)
-
+const RecurMenu = (props) => {
+  const {items, open, ext} = props;
+  return (
+    !items ? null :
+    <SubMenu  className='menu' {...props} ext={ext} open={open} >
+    { items?.map((item, index) => (
+      <MenuItem {...props} key={index} active={index === -1}>
+        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+          <span>{item.text}</span>
+          { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
+        </Link>
+        { !item.sub ? null : <RecurMenu {...props} ext={true} items={item.sub} /> }
+      </MenuItem>
+    )) }
+    </SubMenu>
+  )
+}
+const MainMenu = (props) => {
+  const {items, open, ext} = props;
+  return (
+    !items ? null :
+    <Menu className='menu' {...props} ext={ext} open={open} >
+    { items?.map((item, index) => (
+      <MenuItem {...props} key={index} active={index === -1}>
+        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+          <span>{item.text}</span>
+          { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
+        </Link>
+        { !item.sub ? null : <RecurMenu {...props} ext={true} items={item.sub} /> }
+      </MenuItem>
+    )) }
+    </Menu>
+  )
+}
 
 const MenuContainer = styled.div`
   position: fixed;
@@ -95,7 +100,7 @@ const MenuContainer = styled.div`
     list-style-type: none;
   }
 
-  @media screen and (min-width: ${THEME.size.navMenuStyleThreshold}) {
+  @media screen and (min-width: ${MENU_SETTING.SCREEN_WIDTH_THRESHOLD}) {
     display: none;
   }
 `;
@@ -108,17 +113,18 @@ const PopButton = styled.div`
   z-index: 999999;
 `;
 
-export const PopMenu = ({items, color}) => {
+export const PopMenu = (props) => {
+  const {items, color} = props;
   const [open, setOpen] = useState(false);
 
   return (
-    <MenuContainer className='container'>
+    <MenuContainer className='container' {...props} >
       
       <PopButton className='button' onClick={() => setOpen(!open)} >
-        <Bars open={open} color={color} ></Bars>
+        <Bars open={open} color={color.ft} ></Bars>
       </PopButton>
 
-      <MainMenu open={open} items={items} />
+      <MainMenu {...props} open={open} items={items} />
 
     </MenuContainer>
   )

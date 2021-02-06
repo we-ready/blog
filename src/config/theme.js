@@ -2,7 +2,6 @@ export const THEME = {
 
   size: {
     sectionContainerWidthMax: '1300px',
-    navMenuStyleThreshold   : '576px',
   },
 
   // https://colorbrewer2.org/#type=sequential&scheme=PuBuGn&n=3

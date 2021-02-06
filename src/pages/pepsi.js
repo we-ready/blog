@@ -143,7 +143,7 @@ const Contact = styled.ul`
 `;
 
 const navItems = [
-  { key: 'home',      url: '/#', text: 'Home' },
+  { key: 'home',      url: '/', text: 'Home' },
   { key: 'products',  url: '/#', text: 'Products' },
   { key: 'whatisnew', url: '/#', text: "What's New" },
   { key: 'newsletter',url: '/#', text: 'Newsletter' },
@@ -158,7 +158,6 @@ export default function LandingPage() {
       <Head context={{ head: '百事可乐' }} />
       <Section style={{ background: OPTIONS[index].bg }}>
         
-        <PopMenu color='#999' items={navItems} />
         <HeaderBar>
           
           <Logo>
@@ -166,7 +165,10 @@ export default function LandingPage() {
           </Logo>
 
           <Menu>
-            <NavMenu items={navItems} />
+            <NavMenu items={navItems} color={{ 
+              subBg: OPTIONS[index].bg,
+              arrow: '#fff',
+            }}/>
           </Menu>
 
         </HeaderBar>
@@ -196,6 +198,8 @@ export default function LandingPage() {
           <li><img src='http://qiniuargus.weready.online/icons/instagram.png'/></li>
           <li><img src='http://qiniuargus.weready.online/icons/twitter.png' /></li>
         </Contact>
+
+        <PopMenu color={{ ft: '#999', bg: OPTIONS[index].bg }}  items={navItems} />
 
       </Section>
 

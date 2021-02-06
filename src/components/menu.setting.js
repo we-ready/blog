@@ -1,0 +1,4 @@
+export const MENU_SETTING = {
+  SCREEN_WIDTH_THRESHOLD: '576px',
+  NAV_MENU_HEIGHT: '4em',
+}

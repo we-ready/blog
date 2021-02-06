@@ -12,6 +12,16 @@ query {
         key
         url
         text
+        sub {
+          key
+          url
+          text
+          sub {
+            key
+            url
+            text
+          }
+        }
       }
     }
   }
@@ -21,10 +31,13 @@ query {
   return (
     <Section style={{background: `linear-gradient(90deg,${THEME.color.primary.border},${THEME.color.primary.ft})` }}>
       <CenterColumn>
-        <PopMenu color='#999' items={data.site.siteMetadata.navItems} />
+        <PopMenu color={{ ft: '#999', bg: THEME.color.primary.border }}  items={data.site.siteMetadata.navItems} />
         <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
           <div style={{width: '20rem', color: '#fff'}} >
-            <NavMenu items={data.site.siteMetadata.navItems} />
+            <NavMenu items={data.site.siteMetadata.navItems} color={{ 
+              subBg: THEME.color.primary.border,
+              arrow: '#fff',
+            }}/>
           </div>
         </div>
       </CenterColumn>
