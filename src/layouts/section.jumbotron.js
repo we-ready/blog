@@ -95,6 +95,7 @@ query {
             <NavMenu items={data.site.siteMetadata.navItems} color={{ 
               subBg: THEME.color.primary.border,
               arrow: '#fff',
+              ft: '#fff',
             }}/>
           </div>
         </div>

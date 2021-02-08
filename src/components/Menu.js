@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { MENU_SETTING } from './menu.setting';
+import { SVGTriangle } from './SVG';
 
 /**
   Styled Components
@@ -83,6 +84,7 @@ const SubMenuItem = styled(MenuItem)`
   line-height: 2rem;
 `;
 
+
 /**
   Function Components
  */
@@ -93,9 +95,13 @@ const NavSub = (props) => {
     <SubMenu {...props} ext={ext}>
     { items?.map((item, index) => (
       <SubMenuItem key={index} active={index === -1}>
-        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <span>{item.text}</span>
-          { !item.sub ? null : <span style={{margin: '0 .3rem 0 .9rem', fontSize: '.1rem'}}>></span> }
+          { !item.sub ? null : 
+            <div style={{ height: '100%', marginLeft: '.3em', display: 'inline-flex', justifyContent: 'center', alignItems: 'center'}}>
+              <SVGTriangle width=".8em" height=".8em" color={props.color.ft} direction="right" />
+            </div> 
+          }
         </Link>
         { !item.sub ? null : <NavSub {...props} ext={true} items={item.sub} /> }
       </SubMenuItem>
@@ -103,6 +109,7 @@ const NavSub = (props) => {
     </SubMenu>
   )
 }
+
 export const NavMenu = (props) => {
   const { items } = props;
   return (
@@ -111,9 +118,15 @@ export const NavMenu = (props) => {
       <Menu>
       { items?.map((item, index) => (
         <MenuItem {...props} key={index} active={index === -1} >
-          <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-            <span>{item.text}</span>
-            { !item.sub ? null : <span style={{margin: '0 .3rem', fontSize: '.1rem'}}>v</span> }
+          <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <span>
+              {item.text}
+            </span>
+            { !item.sub ? null : 
+              <div style={{ height: '100%', marginLeft: '.3em', display: 'inline-flex', justifyContent: 'center', alignItems: 'center'}}>
+                <SVGTriangle width=".8em" height=".8em" color={props.color.ft} />
+              </div> 
+            }
           </Link>
           { !item.sub ? null : <NavSub {...props} items={item.sub} /> }
         </MenuItem>

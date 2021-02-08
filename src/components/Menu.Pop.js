@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { Bars } from './bars';
 import { MENU_SETTING } from './menu.setting';
-
+import { SVGTriangle } from './SVG';
 /**
   Styled Components
  */
@@ -59,9 +59,13 @@ const RecurMenu = (props) => {
     <SubMenu  className='menu' {...props} ext={ext} open={open} >
     { items?.map((item, index) => (
       <MenuItem {...props} key={index} active={index === -1}>
-        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <span>{item.text}</span>
-          { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
+          { !item.sub ? null : 
+            <div style={{ height: '100%', marginLeft: '.3em', display: 'inline-flex', justifyContent: 'center', alignItems: 'center'}}>
+              <SVGTriangle width=".8em" height=".8em" color={props.color.ft} />
+            </div> 
+          }
         </Link>
         { !item.sub ? null : <RecurMenu {...props} ext={true} items={item.sub} /> }
       </MenuItem>
@@ -76,9 +80,13 @@ const MainMenu = (props) => {
     <Menu className='menu' {...props} ext={ext} open={open} >
     { items?.map((item, index) => (
       <MenuItem {...props} key={index} active={index === -1}>
-        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+        <Link to={item.url} style={{width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <span>{item.text}</span>
-          { !item.sub ? null : <span style={{margin: '0 .3em 0 .9em', fontSize: '.1em'}}>v</span> }
+          { !item.sub ? null : 
+            <div style={{ height: '100%', marginLeft: '.3em', display: 'inline-flex', justifyContent: 'center', alignItems: 'center'}}>
+              <SVGTriangle width=".8em" height=".8em" color={props.color.ft} />
+            </div> 
+          }
         </Link>
         { !item.sub ? null : <RecurMenu {...props} ext={true} items={item.sub} /> }
       </MenuItem>
